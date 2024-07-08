@@ -1,0 +1,15 @@
+<?php
+$apiKey = 'b4e87cb29ba644fa8044f415a02ad57f';
+$address = urlencode('Av. Eng. Duarte Pacheco 329, 4445-416 Ermesinde');
+$url = "https://api.opencagedata.com/geocode/v1/json?q=$address&key=$apiKey";
+
+$response = file_get_contents($url);
+$data = json_decode($response, true);
+
+if (isset($data['results'][0])) {
+    $location = $data['results'][0]['geometry'];
+    echo 'Latitude: ' . $location['lat'] . ', Longitude: ' . $location['lng'];
+} else {
+    echo 'Endereço não encontrado';
+}
+?>
